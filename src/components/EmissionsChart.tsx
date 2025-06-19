@@ -48,15 +48,15 @@ const EmissionsChart = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm transition-colors">
+    <div className="bg-white rounded-lg shadow-sm transition-colors">
       <div className="p-8 space-y-6">
-        <h1 className="text-4xl font-light text-gray-800 dark:text-white transition-colors">
+        <h1 className="text-4xl font-light text-gray-800 transition-colors">
           EMBODIED<br />CARBON<br />EMISSIONS
         </h1>
 
         <div className="space-y-4">
           <div className="flex flex-col space-y-2">
-            <span className="text-sm text-gray-600 dark:text-gray-200 transition-colors">Type</span>
+            <span className="text-sm text-gray-600 transition-colors">Type</span>
             <div className="flex space-x-2">
               <FilterButton
                 label="Refurbishment"
@@ -77,7 +77,7 @@ const EmissionsChart = () => {
           </div>
 
           <div className="flex flex-col space-y-2">
-            <span className="text-sm text-gray-600 dark:text-gray-200 transition-colors">Status</span>
+            <span className="text-sm text-gray-600 transition-colors">Status</span>
             <div className="flex space-x-2">
               <FilterButton
                 label="Complete"
@@ -94,8 +94,8 @@ const EmissionsChart = () => {
         </div>
 
         <div className="space-y-2">
-          <div className="text-sm text-gray-600 dark:text-gray-200 transition-colors">Key</div>
-          <div className="text-sm text-gray-700 dark:text-gray-100 transition-colors">
+          <div className="text-sm text-gray-600 transition-colors">Key</div>
+          <div className="text-sm text-gray-700 transition-colors">
             Intensity measured by kgCO₂e/m²
           </div>
         </div>
@@ -105,13 +105,13 @@ const EmissionsChart = () => {
           {targetLines.map((target) => (
             <div
               key={target.year}
-              className="absolute w-full border-t border-gray-300 dark:border-gray-600 transition-colors"
+              className="absolute w-full border-t border-gray-300 transition-colors"
               style={{
                 top: `${(1 - target.value / maxValue) * 100}%`,
               }}
             >
               <div className="relative">
-                <span className="absolute -top-5 text-xs text-gray-500 dark:text-gray-300 transition-colors">
+                <span className="absolute -top-5 text-xs text-gray-500 transition-colors">
                   {target.label}
                 </span>
               </div>
@@ -129,15 +129,15 @@ const EmissionsChart = () => {
                   <div
                     className={`w-full transition-colors ${
                       item.buildingType === 'Refurbishment'
-                        ? 'bg-rose-300 dark:bg-rose-400'
-                        : 'bg-rose-800 dark:bg-rose-600'
+                        ? 'bg-rose-300'
+                        : 'bg-rose-800'
                     }`}
                     style={{
                       height: `${(item.value / maxValue) * 384}px`,
                     }}
                   />
                 </div>
-                <span className="text-xs text-gray-600 dark:text-gray-200 mt-1 rotate-45 origin-left transition-colors">
+                <span className="text-xs text-gray-600 mt-1 rotate-45 origin-left transition-colors">
                   {item.value}
                 </span>
               </div>

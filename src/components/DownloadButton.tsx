@@ -14,7 +14,7 @@ const DownloadButton: FC<DownloadButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className="flex items-center text-gray-600 dark:text-gray-300 text-sm hover:text-gray-800 dark:hover:text-white transition-colors"
+      className="flex items-center text-gray-600 text-sm hover:text-gray-800 transition-colors"
     >
       {label}
       <svg

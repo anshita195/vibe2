@@ -42,7 +42,7 @@ const dashboardData: DashboardData = {
 
 const Dashboard = () => {
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm transition-colors">
+    <div className="bg-white rounded-lg shadow-sm transition-colors">
       <div className="p-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <MetricCard
