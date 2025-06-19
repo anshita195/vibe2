@@ -6,7 +6,6 @@ const LoadingCounter = ({ onComplete }: { onComplete: () => void }) => {
   const [count, setCount] = useState(1);
   const [isVisible, setIsVisible] = useState(true);
   const [prevDigits, setPrevDigits] = useState(['0', '0', '1']);
-  const [isBreaking, setIsBreaking] = useState(false);
 
   useEffect(() => {
     const duration = 3000; // 3 seconds total
@@ -23,7 +22,6 @@ const LoadingCounter = ({ onComplete }: { onComplete: () => void }) => {
         setCount(current);
       } else {
         clearInterval(timer);
-        setIsBreaking(true);
         setTimeout(() => {
           setIsVisible(false);
           onComplete();
