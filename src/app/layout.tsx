@@ -4,6 +4,7 @@ import { Providers } from './providers';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Script from 'next/script';
+import SimpleBgToggle from '@/components/SimpleBgToggle';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,13 +24,15 @@ export default function RootLayout({
         <Script src="/theme-init.js" strategy="beforeInteractive" />
       </head>
       <body className={inter.className}>
-        <Providers>
-          <div className="fade-in">
-            <Navbar />
-            {children}
-            <Footer />
-          </div>
-        </Providers>
+        <SimpleBgToggle>
+          <Providers>
+            <div className="fade-in">
+              <Navbar />
+              {children}
+              <Footer />
+            </div>
+          </Providers>
+        </SimpleBgToggle>
       </body>
     </html>
   );
