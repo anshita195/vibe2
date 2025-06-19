@@ -18,13 +18,12 @@ const LoadingCounter = ({ onComplete }: { onComplete: () => void }) => {
 
     const timer = setInterval(() => {
       setPrevDigits(current.toString().padStart(3, '0').split(''));
-      current++;
-      setCount(current);
-      if (current > 100) {
+      if (current < 100) {
+        current++;
+        setCount(current);
+      } else {
         clearInterval(timer);
-        // Start breaking animation
         setIsBreaking(true);
-        // Wait for animation to complete before hiding
         setTimeout(() => {
           setIsVisible(false);
           onComplete();
@@ -42,65 +41,41 @@ const LoadingCounter = ({ onComplete }: { onComplete: () => void }) => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white transition-colors">
-      <div className="w-full max-w-md space-y-8">
-        {/* Progress bar container */}
-        <div className="relative h-2 bg-gray-200 rounded-full overflow-hidden">
-          {/* Left part */}
-          <div 
-            className={`absolute left-0 top-0 h-full bg-rose-800 transition-all duration-150 ease-out
-              ${isBreaking ? 'transform -rotate-12 translate-y-4 translate-x-4 scale-125 opacity-0' : ''}`}
-            style={{ 
-              width: isBreaking ? '50%' : `${count}%`,
-              transitionDuration: isBreaking ? '800ms' : '150ms',
-              transformOrigin: 'right'
-            }}
-          />
-          {/* Right part */}
-          <div 
-            className={`absolute right-0 top-0 h-full bg-rose-800 transition-all duration-150 ease-out
-              ${isBreaking ? 'transform rotate-12 translate-y-4 -translate-x-4 scale-125 opacity-0' : ''}`}
-            style={{ 
-              width: isBreaking ? '50%' : '0%',
-              transitionDuration: isBreaking ? '800ms' : '150ms',
-              transformOrigin: 'left',
-              left: isBreaking ? '50%' : `${count}%`
-            }}
+    <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
+      {/* Progress bar centered */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-10 flex items-center">
+        <div className="w-full h-10 bg-[#333] flex items-center">
+          <div
+            className="h-10 bg-white transition-all duration-150"
+            style={{ width: `${Math.min(count, 100) * 3.2}px` }}
           />
         </div>
-
-        {/* Counter */}
-        <div className={`flex justify-center transition-transform duration-1000 ${isBreaking ? 'scale-150 opacity-0' : ''}`}>
-          <div className="flex h-32 text-[10rem] font-light tracking-tight overflow-hidden">
-            {currentDigits.map((digit, index) => {
-              const hasChanged = changes[index];
-              return (
-                <div key={index} className="relative w-24 overflow-hidden">
-                  {/* Previous digit slides up and out */}
-                  <div
-                    className={`absolute w-full transition-all duration-500 ${
-                      hasChanged ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'
-                    }`}
-                  >
-                    <div className="flex h-32 items-center justify-center text-gray-900">
-                      {prevDigits[index]}
-                    </div>
-                  </div>
-                  {/* Current digit slides up from below */}
-                  <div
-                    className={`absolute w-full transition-all duration-500 ${
-                      hasChanged ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-                    }`}
-                  >
-                    <div className="flex h-32 items-center justify-center text-gray-900">
-                      {digit}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+      </div>
+      {/* Odometer counter in bottom left */}
+      <div className="absolute left-4 bottom-2 flex text-white text-[7vw] font-light tracking-tight h-[10vw] select-none">
+        {currentDigits.map((digit, index) => {
+          const hasChanged = changes[index];
+          return (
+            <div key={index} className="relative w-[7vw] overflow-hidden">
+              {/* Previous digit slides up and out */}
+              <div
+                className={`absolute w-full transition-all duration-500 ${
+                  hasChanged ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'
+                }`}
+              >
+                <div className="flex h-[10vw] items-end justify-center">{prevDigits[index]}</div>
+              </div>
+              {/* Current digit slides up from below */}
+              <div
+                className={`absolute w-full transition-all duration-500 ${
+                  hasChanged ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+                }`}
+              >
+                <div className="flex h-[10vw] items-end justify-center">{digit}</div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
