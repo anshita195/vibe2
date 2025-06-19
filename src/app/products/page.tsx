@@ -1,3 +1,5 @@
+"use client";
+
 export default function ProductsPage() {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center">
