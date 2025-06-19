@@ -1,3 +1,5 @@
+"use client";
+
 import LoadingCounter from '@/components/LoadingCounter';
  
 export default function Loading() {
